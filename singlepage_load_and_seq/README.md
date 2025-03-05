@@ -1,6 +1,3 @@
-# dashboard-templates
-A repository of dashboard templates, for use in pathogen surveillance activities (especially wastewater-integrated surveillance). 
+# single page viral load and seq
 
-Each of the subdirectories of this repository includes a fully functional, Plotly Dash based web-ready dashboard, which can be modified as needed for public health use. If you aren't familiar with Plotly Dash, we recommend first working through the [Dash tutorial](https://dash.plotly.com/tutorial). 
-
-For testing purposes, each of these scripts can be run using `python app.py`. However, for real-world deployment purposes you'll want to use a production WSGI server such as gunicorn. 
+This builds from the single page viral load template, including the clinical counts and viral load over time as well as the virus lineage prevalence (as inferred with Freyja) over time. 
