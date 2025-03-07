@@ -14,6 +14,7 @@ dash.register_page(__name__, path='/')
 start_date = '2024-06-01'
 end_date =  '2024-12-01'
 
+#Creating a function to for a bar chart to compare the wastewater levels to the clinical cases
 def bar_chart():
     df = load_rsa_cases_and_levels()
     # in our data, end is the end of the epiweek
@@ -34,7 +35,7 @@ def bar_chart():
             name="Clinical",
             hovertemplate='%{y} cases',
             textposition = "none"),
-        secondary_y=False)
+        secondary_y=False) #This will plot the clinical cases on the primary (left) y-axis
 
     fig.add_trace(
         go.Scatter(
@@ -52,7 +53,7 @@ def bar_chart():
             line=dict(color="cornflowerblue", width=4),
             hovertemplate='%{y} copies/mL',
             name="Smoothed wastewater"),
-            secondary_y=True)
+            secondary_y=True) #The wastewater levels will be plotted on the secondary y-axis (right)
 
     fig.update_layout(
         template='none',
@@ -83,7 +84,7 @@ def bar_chart():
     return fig
 
 
-
+#Function to specify the layout of the page including the title, intro paragraph and positioning of graphs 
 def home_container():
     return dbc.Container([
         dbc.Row(
