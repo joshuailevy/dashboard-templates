@@ -9,13 +9,19 @@ from datetime import timedelta
 from load_data import load_monthly_data, load_monthly_data_smoothed, load_rsa_cases_and_levels, load_color_map
 from plotly.subplots import make_subplots
 
+#This is to register the page in the dash app
 dash.register_page(__name__, path='/seq')
 
+#Specify the start and end dates for filtering your data
 start_date = '2024-06-01'
 end_date =  '2024-12-01'
 
+#This container creates the overall layout for the page, including the 
+#title, a short intro, radio buttons for selecting the plot type as well as the actual graphs 
+
 def new_container():
     return dbc.Container([
+        #Here we specify the header row and title 
         dbc.Row(
             dbc.Col(
                 html.H1(id="H1", children="SARS-CoV-2 Wastewater Surveillance", style={'color': 'white'}),
@@ -23,18 +29,22 @@ def new_container():
             ),
             style={"textAlign": "center", "paddingTop": 30, "paddingBottom": 30, "backgroundColor": "#A6CE39"}
         ),
+        #To change the spacing
         html.Div(style={'height': '15px'}),
+        #This is how you add in a short, descriptive sentence/paragraph 
         html.P(
             id="seq_intro",
             children=['Basic info on wastewater sequencing analyses'],
             style={"font-size": 20,"textAlign": "center"}
         ),
         html.Div(style={'height': '30px'}),
+        #Here you specify the heading for your graph
         html.H3(
             id="H3", children="SARS-CoV-2 Lineage Prevalence Observed via Wastewater",
             style={"textAlign": "center", "marginTop": 5, "marginBottom": 5}
         ),
         html.Div(style={'height': '15px'}),
+        #This is how to create the radio buttons to choose between the 'Monthly Trends' and 'Smoothed Daily Trends'
         html.Div(
             dbc.RadioItems(
                 id="plottype",
@@ -52,6 +62,7 @@ def new_container():
             style={"marginTop": 0, "marginBottom": 0}
         ),
         html.Div(style={'height': '15px'}),
+        #Then we add in the container for the graph
         dbc.Row(
             dcc.Graph(id="seq_graph0", config={'displayModeBar': False}),
             style={"width": "100%", "align-items": "center", 'justify-content': 'center', 'margin': 'auto'}
@@ -59,6 +70,10 @@ def new_container():
     ], fluid=True)
 
 layout = new_container
+
+#The callbacks allow the plots to update based on what the user selects, 
+#a stacked bar chart will be created if the user selects monthly 
+#or a smoothed line graph will be created if the user selects daily
 
 @callback(
     Output("seq_graph0", "figure"),
