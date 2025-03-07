@@ -100,6 +100,7 @@ def bar_chart():
     fig.update_traces(hoverinfo = 'name+y',cliponaxis=False)
     return fig
 
+#The callback allows figures to be updated based on user input - This is what makes the dashboard interactive.
 @callback(
     Output("seq_graph0", "figure"),
     Input("plottype", "value"))
